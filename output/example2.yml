@@ -1,0 +1,188 @@
+system:
+  skin:
+  - SK
+  membranes:
+  - SK:
+      objects:
+      - Vac2: 3
+      membranes:
+      - TCell:
+          objects:
+          - TCR: 1
+          number: 5
+      - BCell:
+          objects:
+          - BCR: 1
+          number: 1000
+      - CS:
+          objects:
+          - IL2: 500
+          - IFN: 300
+          membranes:
+          - Blood
+          - THelper:
+              objects:
+              - TCR: 1
+              number: 5
+          - Lymph:
+              membranes:
+              - PlasmaCell:
+                  objects:
+                  - BCR: 1
+                  number: 200
+              - KillerT:
+                  objects:
+                  - TCR: 1
+                  number: 300
+              - Memory:
+                  membranes:
+                  - MemoryB:
+                      objects:
+                      - BCR: 1
+                      number: 100
+                  - MemoryT:
+                      objects:
+                      - TCR: 1
+                      number: 50
+  rules:
+  - r1:
+      membrane: SK
+      input:
+        membranes:
+        - SK:
+            objects:
+            - Vac2: 3
+      output:
+        membranes:
+        - SK:
+            objects:
+            - IL2: 10
+  - r2:
+      membrane: SK
+      input:
+        membranes:
+        - SK:
+            objects:
+            - IL2: 10
+      output:
+        membranes:
+        - SK:
+            objects:
+            - IL2: 5
+  - r3:
+      membrane: SK
+      input:
+        membranes:
+        - SK:
+            objects:
+            - IL2: 5
+            membranes:
+            - CS
+      output:
+        membranes:
+        - SK:
+            membranes:
+            - CS:
+                objects:
+                - IL2: 5
+  - r4:
+      membrane: SK
+      input:
+        membranes:
+        - SK:
+            objects:
+            - Vac2: 1
+            membranes:
+            - TCell:
+                objects:
+                - TCR: 1
+                number: 5
+      output:
+        membranes:
+        - SK:
+            membranes:
+            - TCell:
+                objects:
+                - Vac2: 1
+                - TCRa: 1
+                number: 5
+  - r5:
+      membrane: SK
+      input:
+        membranes:
+        - SK:
+            membranes:
+            - TCell:
+                objects:
+                - TCRa: 1
+      output:
+        membranes:
+        - SK:
+            membranes:
+            - TCell:
+                objects:
+                - TCRa: 1
+                - IL2: 2
+  - r6:
+      membrane: SK
+      input:
+        membranes:
+        - SK:
+            membranes:
+            - BCell:
+                objects:
+                - BCR: 1
+                number: 1000
+            - CS:
+                objects:
+                - IL2: 1
+      output:
+        membranes:
+        - SK:
+            membranes:
+            - BCell:
+                objects:
+                - BCRa: 1
+                - IgM: 1
+                number: 1000
+  - r7:
+      membrane: Lymph
+      input:
+        membranes:
+        - Lymph:
+            membranes:
+            - PlasmaCell:
+                objects:
+                - BCR: 1
+                number: 500
+      output:
+        membranes:
+        - Lymph:
+            membranes:
+            - PlasmaCell:
+                objects:
+                - BCR: 1
+                - IgG: 10
+                number: 500
+  - r8:
+      membrane: CS
+      input:
+        membranes:
+        - CS:
+            membranes:
+            - KillerT:
+                objects:
+                - TCR: 1
+                number: 300
+            - Lymph:
+                objects:
+                - IgG: 1
+      output:
+        membranes:
+        - CS:
+            membranes:
+            - KillerT:
+                objects:
+                - TCRa: 1
+                - IFN: 1
+                number: 300

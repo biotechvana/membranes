@@ -1,0 +1,8 @@
+# No external dependencies required for basic text/ini file processing 
+# Dependencies
+colorama>=0.4.6
+sortedcontainers>=2.4.0
+PyYAML>=6.0.1
+pandas>=2.0.0
+plotly>=5.18.0
+pyvis>=0.3.2
